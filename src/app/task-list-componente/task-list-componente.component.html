@@ -1,0 +1,11 @@
+<app-task-item-component (emitirTarea)="agregarListaTareas($event)" ></app-task-item-component>
+<section>
+  <ul>
+     @for (item of tasklist; track $index ) {
+       <li>{{item.nombre}}</li>       
+       <input (change)="marktask(item)" id="myCheckbox" type="checkbox">
+      <button (click)="onDeleteT($index)">ELIMINAR</button>
+    }
+   </ul>
+</section>
+

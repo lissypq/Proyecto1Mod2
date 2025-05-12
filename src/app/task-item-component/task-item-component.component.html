@@ -1,0 +1,9 @@
+<section>
+  <fieldset> 
+      <legend> Adicionar Tarea </legend>
+      <label for="">Tarea: </label>
+      <input type="text" [(ngModel)]= "tarea.nombre" [ngModelOptions]="{standalone: true}">
+      <input type="checkbox" [checked] [(ngModel)]= "tarea.estado" [ngModelOptions]="{standalone: true}">
+      <button (click)="addTarea()">Adicionar</button>
+       </fieldset> 
+</section>
