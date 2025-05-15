@@ -6,12 +6,15 @@ import { NgForm } from '@angular/forms';
 import { TasksService } from '../tasks.service';
 @Component({
   selector: 'app-task-list-componente',
-  imports: [TaskItemComponentComponent],
+  imports: [TaskItemComponentComponent, FormsModule],
+  standalone: true,
   templateUrl: './task-list-componente.component.html',
   styleUrl: './task-list-componente.component.css'
 })
+
 export class TaskListComponenteComponent implements OnInit {
-tasklist: Tarea[] = [ ]
+tasklist: Tarea[] = []
+
 constructor( private taskservices:TasksService) { }
 
  ngOnInit(): void {
@@ -26,17 +29,11 @@ constructor( private taskservices:TasksService) { }
     this.taskservices.addTask(tarea)
    }
 
-   marktask(tarea: Tarea):void{
-    this.taskservices.completeTask(tarea.id ? tarea.id : 0);
-   }
-
+ 
   onDeleteT(id: number): void {
         this.taskservices.deleteTask(id)
       
               }
 
-  onCheck(index: number) {
-    console.log(this.tasklist);
-    this.tasklist[index].estado = !this.tasklist[index].estado;
-  }
+
 }

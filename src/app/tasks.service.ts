@@ -27,13 +27,7 @@ export class TasksService {
         this.setlocalStorage()
       }
       
-      completeTask(id: number): void {
-        const tarea = this.task.find(tarea => tarea.id === id);
-        if (tarea) {
-          tarea.estado = !tarea.estado;
-            this.setlocalStorage();
-        }
-      }    
+      
       getfromLocalStorage(): void {
       if (typeof localStorage!== 'undefined') {
         const savetask = localStorage.getItem('task');

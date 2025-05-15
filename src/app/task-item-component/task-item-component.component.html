@@ -1,9 +1,29 @@
-<section>
-  <fieldset> 
-      <legend> Adicionar Tarea </legend>
-      <label for="">Tarea: </label>
-      <input type="text" [(ngModel)]= "tarea.nombre" [ngModelOptions]="{standalone: true}">
-      <input type="checkbox" [checked] [(ngModel)]= "tarea.estado" [ngModelOptions]="{standalone: true}">
-      <button (click)="addTarea()">Adicionar</button>
-       </fieldset> 
-</section>
+<form [formGroup] = "formularios" (ngSubmit)="addTarea()" >
+         
+  <label for="">ID: </label>
+  <input 
+  type="number" 
+  [(ngModel)]= "tarea.id" 
+  formControlName="id" 
+   />
+   @if(formularios.controls['id'].getError('required')){
+    <div>
+    El campo ID es requerido
+    </div>
+   }
+  <label for="">Nombre de Tarea: </label>
+  <input type="text"  
+   formControlName="nombre"
+  />
+    @if(formularios.controls['nombre'].getError('required') && formularios.controls['nombre'].touched){
+    <div>
+      El campo nombre es requerido
+    </div>
+   }
+   @if(formularios.controls['nombre'].getError('minlength') && formularios.controls['nombre'].touched){
+    <div>
+      El campo nombre es requerido
+    </div>
+   }
+  <button >Adicionar</button>
+  </form>
