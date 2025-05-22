@@ -1,45 +1,36 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Tarea } from './tarea.interface';
-
+import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment.development';
+import { catchError, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
- task: Tarea[] = []
+ 
 
-      constructor() { 
-      this.getTasks();
-      }
-
-
-      getTasks(): Tarea[] {
-        this.getfromLocalStorage()
-        return this.task
-      }
-
-      addTask(tarea: Tarea): void {
-        this.task.push(tarea)
-        this.setlocalStorage()
-      }
-
-      deleteTask(id:number): void {
-        this.task = this.task.filter(tarea => tarea.id !== id);         
-        this.setlocalStorage()
-      }
+      http= inject( HttpClient)
+       urlBase= environment.urlBase
       
-      
-      getfromLocalStorage(): void {
-      if (typeof localStorage!== 'undefined') {
-        const savetask = localStorage.getItem('task');
-        if (savetask) {
-          this.task = JSON.parse(savetask);
-        }
-      }
-        }
-      setlocalStorage(): void {
-        if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('task', JSON.stringify(this.task));
-      }  
-      }  
+  gettask(): Observable<Tarea[]> {
+   return this.http.get<Tarea[]>(this.urlBase);
+  }
 
-}
+  gettaskbyid(id: number): Observable<Tarea> {
+   return this.http.get<Tarea>(`${this.urlBase}/${id}`);
+  }
+  posttask(tarea: Tarea): Observable<Tarea> {
+   return this.http.post<Tarea>(`${this.urlBase}`,tarea);
+  }
+
+  puttask(tarea: Tarea, id: number): Observable<Tarea> {
+   return this.http.put<Tarea>(`${this.urlBase}/${id}`,tarea)
+  }
+   
+  deletetaskbyid(id: number): Observable<Tarea> {
+   return this.http.delete<Tarea>(`${this.urlBase}/${id}`);
+  }
+
+
+ }

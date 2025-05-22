@@ -1,13 +1,14 @@
 <section>
   <h2>Añadir tareas</h2>
-  <app-task-item-component (emitirTarea)="agregarListaTareas($event)" ></app-task-item-component>
+  <app-task-item-component (emitirTarea)="receiveT($event)" ></app-task-item-component>
    <hr/>
   <h2>Lista de tareas</h2>
   <ul>
      @for (item of tasklist; track $index ) {
        <li>Id: {{item.id}} - Tarea: {{item.nombre}}
-        <a href="" (click)="onDeleteT(item.id)">Eliminar</a>
-        <a href="">Actualizar</a>
+        <button href="" (click)="onDeleteT(item.id)">Eliminar</button>          
+       <button routerLink = "/Tareas/{{item.id}}"> Detalle de una Tarea </button>
+       
        </li>    
           
     }

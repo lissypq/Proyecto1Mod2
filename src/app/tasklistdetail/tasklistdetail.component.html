@@ -1,0 +1,14 @@
+<h1>Tasklist Detail</h1>
+<fieldset>
+  <legend>Update</legend>  
+   <form [formGroup] = "formulario"  (ngSubmit)="updatetask()"  >
+    <label for="">id: </label>
+    <input  type="number" id="id"  formControlName="id" 
+    
+    />
+    <label for="">Nombre de Tarea: </label>
+    <input type="text"  id="nombre"  formControlName="nombre"  />
+    <button type="submit"> Update Task</button>
+    </form>  
+</fieldset>
+
